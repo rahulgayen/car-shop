@@ -1,0 +1,27 @@
+POST http://localhost:3000/auth/signup
+content-type:application/json
+
+{
+    "email":"bqb@aa.com",
+    "password":"gjacvf"
+}
+
+### Get an User
+GET http://localhost:3000/auth/06949f0c-5c44-4648-a787-b09f59a864ac
+content-type:application/json
+
+### Get all User with mail
+GET http://localhost:3000/auth
+# GET http://localhost:3000/auth/?email=bb@aa.com
+content-type:application/json
+
+
+### Update user
+PATCH  http://localhost:3000/auth/06949f0c-5c44-4648-a787-b09f59a864ac
+content-type:application/json
+
+{"password":"klaERt"}
+
+### delete user
+DELETE http://localhost:3000/auth/38c03f43-139e-49a2-9da6-871573cc385b
+content-type:application/json
