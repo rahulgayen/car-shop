@@ -5,9 +5,13 @@ import { UpdateUserDto } from './dto/update-user.dto';
 import { UserDto } from './dto/user.dto';
 import { UsersService } from './users.service';
 import { AuthService } from './auth.service';
+import { CurrentUserInterceptor } from './interceptor/current-user.interceptor';
+import { CurrentUser } from './decorators/current-user.decorator';
+import { User } from './users.entity';
 
 @Controller('auth')
 @Serialize(UserDto)
+@UseInterceptors(CurrentUserInterceptor)
 export class UsersController {
   constructor(private authService: AuthService, private userService: UsersService) {}
   @Post('/signup')
@@ -27,8 +31,7 @@ export class UsersController {
   }
 
   @Get('/whoami')
-  async getUser(@Session() session) {
-    const user = await this.userService.findOne(session.userId);
+  async getUser(@CurrentUser() user: User) {
     return user;
   }
   @Post('/signout')
