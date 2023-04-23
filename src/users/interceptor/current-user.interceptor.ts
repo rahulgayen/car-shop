@@ -1,6 +1,4 @@
 import { Injectable, NestInterceptor, ExecutionContext, CallHandler } from '@nestjs/common';
-import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
 import { UsersService } from '../users.service';
 
 @Injectable()
@@ -10,7 +8,7 @@ export class CurrentUserInterceptor implements NestInterceptor {
     // const [request] = context.getArgs();
     const request = context.switchToHttp().getRequest();
     const { userId } = request.session || {};
-
+    console.log('cur user interceptor');
     if (userId) {
       const user = await this.userService.findOne(userId);
       request.currentUser = user;
