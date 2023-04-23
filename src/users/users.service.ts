@@ -14,6 +14,7 @@ export class UsersService {
   }
 
   findOne(id: string) {
+    if (!id) throw new NotFoundException('Invalid User Id');
     return this.repo.findOne({ where: { id } });
   }
   find(email: string) {
